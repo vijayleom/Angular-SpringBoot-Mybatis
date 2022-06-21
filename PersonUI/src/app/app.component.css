@@ -1,0 +1,67 @@
+.menu {
+ margin-top: 20px;
+ margin-bottom: 20px;
+}
+
+.hyperlink{
+	cursor: pointer;
+	text-decoration: underline;
+}
+
+.footer{
+	font-weight: 800;
+	margin-top: 20px;
+}
+
+.footer-final{
+  position: relative;
+  top: 30%;
+  left: 40%;
+  height: 100%;
+  width: 100%;
+}
+
+.button-test{
+	margin: 10px;
+}
+
+.showData{
+	display: inline;
+}
+
+.hideData{
+	display: none;
+}
+
+.findbox{
+  width: 500px;	
+  text-align: center;
+}
+
+.result{
+	text-align: center;
+	font-weight: 700;
+	margin-top: 30px;
+}
+
+.tab-specific{
+	margin-top: 10px;	
+}
+
+table, th, td{
+	border: 2px solid;
+	margin-left: auto;
+    margin-right: auto;
+}
+
+th, td{
+	height: 20px;
+	width: 120px;
+    text-align: center;
+}
+
+.button-test-save{
+	position: relative;
+	top: 30%;
+	left: 35%;
+}

@@ -1,0 +1,88 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN'
+  'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+
+<mapper namespace='com.tent.database.mapper.PersonMapper'>
+
+	<resultMap type='Person' id='personResult'>
+		<id property='personId' column='IdPerson' />
+		<result property='personFirstName' column='FirstName' />
+		<result property='personLastName' column='LastName' />
+		<result property='personAddress' column='Address' />
+		<result property='personPhone' column='Phone' />
+	</resultMap>
+
+	<resultMap type='Person'
+		id='personAddressResult'>
+		<id property='addressId' column='IdAddress' />
+		<result property='personId' column='IdPerson' />
+		<result property='personAddress' column='Address' />
+	</resultMap>
+
+	<resultMap type='Person'
+		id='personPhoneResult'>
+		<id property='phoneId' column='IdContact' />
+		<result property='personId' column='IdPerson' />
+		<result property='personPhone' column='Phone' />
+	</resultMap>
+
+	<select id='getUserById' parameterType='int'
+		resultType='com.tent.database.modal.Person'>
+		SELECT
+		p.IdPerson as personId,
+		p.FirstName as
+		personFirstName,
+		p.LastName as personLastName,
+		pa.Address as
+		personAddress,
+		pc.Phone as
+		personPhone
+		FROM PERSON P
+		inner join
+		PERSON_ADDRESS pa on p.IdPerson =
+		pa.IdPerson
+		inner join PERSON_CONTACT
+		pc on p.IdPerson = pc.IdPerson
+		WHERE p.IdPerson =
+		#{personId}
+	</select>
+
+	<insert id='insertPerson' parameterType="com.tent.database.modal.Person">
+		INSERT INTO PERSON(FirstName,
+		LastName)
+		VALUES(#{personFirstName},
+		#{personLastName})
+		<selectKey keyProperty="personId" resultType="int" order="AFTER">
+			SELECT LAST_INSERT_ID() as personId
+		</selectKey>
+	</insert>
+
+	<insert id='insertPersonAddress' 
+		useGeneratedKeys='true'>
+		INSERT INTO
+		PERSON_ADDRESS(IdPerson,Address)
+		VALUES(#{personId},
+		#{personAddress})
+		<selectKey keyProperty='addressId' resultType="int" order="AFTER">
+			SELECT LAST_INSERT_ID() as IdAddress
+		</selectKey>
+	</insert>
+
+	<insert id='insertPersonPhone'
+		useGeneratedKeys='true'>
+		INSERT INTO PERSON_CONTACT(IdPerson, Phone)
+		VALUES(#{personId},
+		#{personPhone})
+		<selectKey keyProperty='phoneId' resultType="int" order="AFTER">
+			SELECT LAST_INSERT_ID() as IdContact
+		</selectKey>
+	</insert>
+
+
+
+	<delete id='deletePerson' parameterType='int'>
+		DELETE FROM PERSON WHERE
+		IdPerson = #{personId}
+	</delete>
+
+</mapper>
